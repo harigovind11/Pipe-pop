@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelData _level;
     [SerializeField] private Pipe _cellPrefab;
 
-    [SerializeField]  GameObject gameOverCanvas;
-    [SerializeField]  GameObject buttonsCanvas;
     private bool hasGameFinished;
     private Pipe[,] pipes;
     private List<Pipe> startPipes;
@@ -148,42 +146,10 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         //UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-        LoadNextLevel();
+      LevelManager.Instance.LoadNextLevel();
     }
 
 
 
-    public  void GameOver()
-    {
-        buttonsCanvas.SetActive(false);
-        gameOverCanvas.SetActive(true);
-        Time.timeScale = 0f;
-        
-    }
-
-    public void ReloadGame()
-    {
-        Time.timeScale = 1f;
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
-    }
-
-    public void LoadNextLevel()
-    {
-
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
-        {
-            nextSceneIndex = 0;
-        }
-        SceneManager.LoadScene(nextSceneIndex);
-    }
-
- 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 }
 
